@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import {
@@ -7,9 +7,21 @@ import {
   removeWatchedMovie,
   getWatchedMovies,
   getAllMovies,
-} from "./index.js";
+} from "./actions.js";
+import Movie from "./Movie";
 
-function App(props) {
+const App = (props) => {
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [comment, setComment] = useState("");
+  const [allMovies, setAllMovies] = useState([]);
+  const [watchedMovies, setWatchedMovies] = useState([]);
+
+  useEffect(() => {
+    setAllMovies(getAllMovies());
+    setWatchedMovies(getWatchedMovies());
+  }, []);
+
   return (
     <div className="App">
       <h1>Codest Movies!</h1>
@@ -17,34 +29,19 @@ function App(props) {
       <b>
         TITLE:
         <br />
-        <input
-          type="text"
-          onChange={function (e) {
-            title = e.target.value;
-          }}
-        />
+        <input type="text" onChange={(e) => setTitle(e.target.value)} />
       </b>
       <br />
       <b>
         IMAGE URL:
         <br />
-        <input
-          type="text"
-          onChange={function (e) {
-            image = e.target.value;
-          }}
-        />
+        <input type="text" onChange={(e) => setImage(e.target.value)} />
       </b>
       <br />
       <b>
         COMMENT:
         <br />
-        <input
-          type="text"
-          onChange={function (e) {
-            comment = e.target.value;
-          }}
-        />
+        <input type="text" onChange={(e) => setComment(e.target.value)} />
       </b>
       <br />
       <input
@@ -56,19 +53,23 @@ function App(props) {
       />
 
       <h1>Watchlist:</h1>
-      {/* would be cleaner to then use the components I spoke of above */}
-      {getMoviesComponents(getAllMovies())}
-
+      {allMovies.map((movie) => (
+        <Movie
+          movie={movie}
+          movieType="all"
+          onClick={() => addWatchedMovie(movie)}
+        />
+      ))}
       <h1>Already watched:</h1>
-      {/* would be cleaner to then use the components I spoke of above */}
-      {getWatchedMoviesComponents(getWatchedMovies())}
+      {watchedMovies.map((movie) => (
+        <Movie
+          movie={movie}
+          movieType="watched"
+          onClick={() => removeWatchedMovie(movie.title)}
+        />
+      ))}
     </div>
   );
-}
-
-// put these values in our state
-var title = "";
-var image = "";
-var comment = "";
+};
 
 export default App;
