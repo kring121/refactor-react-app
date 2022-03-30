@@ -14,20 +14,24 @@ code {
 }
 
 .watched {
-	margin: 0 auto;
-	width: 30%;
+  margin: 0 auto;
+  width: 30%;
 }
 
 .span {
-	float: left;
+  float: left;
 }
 
 img {
-	border-right: 60px solid black;
-	border-left: 60px solid black;
+  border-right: 60px solid black;
+  border-left: 60px solid black;
 }
 
 .all {
-	margin: 0 auto;
-	width: 30%;
+  margin: 0 auto;
+  width: 30%;
+}
+
+.movie-watched {
+  cursor: pointer;
 }

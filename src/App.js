@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
-import {
-  addWatchedMovie,
-  add,
-  removeWatchedMovie,
-  getWatchedMovies,
-  getAllMovies,
-} from "./actions.js";
 import Movie from "./Movie";
+import { useWatchedMovies, useAllMovies } from "./hooks";
 
 const App = (props) => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [comment, setComment] = useState("");
-  const [allMovies, setAllMovies] = useState([]);
-  const [watchedMovies, setWatchedMovies] = useState([]);
+  const [watchedMovies, setWatchedMovies] = useWatchedMovies();
+  const [allMovies, setAllMovies] = useAllMovies();
 
-  useEffect(() => {
-    setAllMovies(getAllMovies());
-    setWatchedMovies(getWatchedMovies());
-  }, []);
+  const add = (title, image, comment) => {
+    setAllMovies([...allMovies, { title, image, comment }]);
+  };
+
+  const addWatchedMovie = (newMovie) => {
+    setWatchedMovies([...watchedMovies, newMovie]);
+  };
+
+  const removeWatchedMovie = (title) => {
+    const updatedMovieList = watchedMovies.filter(
+      (movie) => movie.title !== title
+    );
+    console.log(updatedMovieList);
+    setWatchedMovies(updatedMovieList);
+  };
 
   return (
     <div className="App">
@@ -46,15 +51,14 @@ const App = (props) => {
       <br />
       <input
         type="button"
-        onClick={function (e) {
-          add(title, image, comment);
-        }}
+        onClick={() => add(title, image, comment)}
         value="ADD MOVIE"
       />
 
       <h1>Watchlist:</h1>
       {allMovies.map((movie) => (
         <Movie
+          key={movie.title}
           movie={movie}
           movieType="all"
           onClick={() => addWatchedMovie(movie)}
@@ -63,6 +67,7 @@ const App = (props) => {
       <h1>Already watched:</h1>
       {watchedMovies.map((movie) => (
         <Movie
+          key={movie.title}
           movie={movie}
           movieType="watched"
           onClick={() => removeWatchedMovie(movie.title)}

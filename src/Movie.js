@@ -7,7 +7,7 @@ const Movie = ({ movie, movieType, onClick }) => {
         <img src={movie.image} height="100px" />
       </div>
       <span>
-        <a className="movie-watched" href="#" onClick={onClick}>
+        <a className="movie-watched" onClick={onClick}>
           {movie.title}
         </a>
       </span>
