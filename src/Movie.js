@@ -1,8 +1,8 @@
 import React from "react";
 
-const Movie = ({ movie, movieType, onClick }) => {
+const Movie = ({ movie, onClick }) => {
   return (
-    <div className={movieType}>
+    <div>
       <div>
         <img src={movie.image} height="100px" />
       </div>

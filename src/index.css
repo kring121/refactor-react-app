@@ -13,11 +13,6 @@ code {
     monospace;
 }
 
-.watched {
-  margin: 0 auto;
-  width: 30%;
-}
-
 .span {
   float: left;
 }
@@ -27,11 +22,30 @@ img {
   border-left: 60px solid black;
 }
 
-.all {
-  margin: 0 auto;
-  width: 30%;
-}
-
 .movie-watched {
   cursor: pointer;
+}
+
+.header {
+  font-size: 48px;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.add-container {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.add-container input {
+  margin: 12px;
+}
+
+.watchlist-container {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.watched-container {
+  grid-column-start: 3;
 }

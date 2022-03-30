@@ -29,50 +29,53 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <h1>Codest Movies!</h1>
-      <h1>Add movie!</h1>
-      <b>
-        TITLE:
+      <h1 className="header">Codest Movies!</h1>
+      <div className="add-container">
+        <h1>Add movie!</h1>
+        <b>
+          TITLE:
+          <br />
+          <input type="text" onChange={(e) => setTitle(e.target.value)} />
+        </b>
         <br />
-        <input type="text" onChange={(e) => setTitle(e.target.value)} />
-      </b>
-      <br />
-      <b>
-        IMAGE URL:
+        <b>
+          IMAGE URL:
+          <br />
+          <input type="text" onChange={(e) => setImage(e.target.value)} />
+        </b>
         <br />
-        <input type="text" onChange={(e) => setImage(e.target.value)} />
-      </b>
-      <br />
-      <b>
-        COMMENT:
+        <b>
+          COMMENT:
+          <br />
+          <input type="text" onChange={(e) => setComment(e.target.value)} />
+        </b>
         <br />
-        <input type="text" onChange={(e) => setComment(e.target.value)} />
-      </b>
-      <br />
-      <input
-        type="button"
-        onClick={() => add(title, image, comment)}
-        value="ADD MOVIE"
-      />
-
-      <h1>Watchlist:</h1>
-      {allMovies.map((movie) => (
-        <Movie
-          key={movie.title}
-          movie={movie}
-          movieType="all"
-          onClick={() => addWatchedMovie(movie)}
+        <input
+          type="button"
+          onClick={() => add(title, image, comment)}
+          value="ADD MOVIE"
         />
-      ))}
-      <h1>Already watched:</h1>
-      {watchedMovies.map((movie) => (
-        <Movie
-          key={movie.title}
-          movie={movie}
-          movieType="watched"
-          onClick={() => removeWatchedMovie(movie.title)}
-        />
-      ))}
+      </div>
+      <div className="watchlist-container">
+        <h1>Watchlist:</h1>
+        {allMovies.map((movie) => (
+          <Movie
+            key={movie.title}
+            movie={movie}
+            onClick={() => addWatchedMovie(movie)}
+          />
+        ))}
+      </div>
+      <div className="watched-container">
+        <h1>Already watched:</h1>
+        {watchedMovies.map((movie) => (
+          <Movie
+            key={movie.title}
+            movie={movie}
+            onClick={() => removeWatchedMovie(movie.title)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
